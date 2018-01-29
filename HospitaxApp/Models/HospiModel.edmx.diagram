@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d7d66a94b88141b98a16e04660184d5e" Name="Diagram1">
+        <EntityTypeShape EntityType="HospitaxDBModel.Ankiety" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HospitaxDBModel.Hospitujacy" Width="1.5" PointX="4.125" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HospitaxDBModel.OcenySlowne" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HospitaxDBModel.Protokoly" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HospitaxDBModel.Prowadzacy" Width="1.5" PointX="7" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="HospitaxDBModel.FK_Ankiety_Protokoly" />
+        <AssociationConnector Association="HospitaxDBModel.FK_Hospitujacy_Protokoly" />
+        <AssociationConnector Association="HospitaxDBModel.FK_Hospitujacy_Prowadzacy" />
+        <AssociationConnector Association="HospitaxDBModel.FK_OcenySlowne_Protokoly" />
+        <AssociationConnector Association="HospitaxDBModel.FK_Protokoly_Prowadzacy" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Strona Główna";
+}
+
+<div class="jumbotron">
+    <h1>Hospitax</h1>
+    <p class="lead">System Politechniki Wrocławskiej wspierający proces hospitacji na W8.</p>
+    <p class="lead">(Andrzej Benedyk, 228027)</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("Prowadzący", "Index", "Prowadzacies")</h2>
+        <p>
+            Wyświetl listę nauczycieli akademickich pracujących na PWr.
+            Mogą oni wchodzić w rolę hospitowanych lub hospitujących.
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("Hospitacje", "Index", "Protokolies")</h2>
+        <p>Wypełnij nowy protokół hospitacyjny lub przeglądnij wypełnione wcześniej.</p>
+    </div>
+</div>

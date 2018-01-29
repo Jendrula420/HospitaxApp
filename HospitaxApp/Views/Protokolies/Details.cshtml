@@ -1,0 +1,65 @@
+﻿@model HospitaxApp.Models.Protokoly
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Szczegóły Hospitacji</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Kurs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kurs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prowadzacy.Tytul)
+            @Html.DisplayNameFor(model => model.Prowadzacy.Imie)
+            @Html.DisplayNameFor(model => model.Prowadzacy.Nazwisko)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prowadzacy.Tytul)
+            @Html.DisplayFor(model => model.Prowadzacy.Imie)
+            @Html.DisplayFor(model => model.Prowadzacy.Nazwisko)
+        </dd>
+        @foreach (var item in Model.Ankieties)
+    {
+        <dt>
+            @Html.DisplayFor(model => item.Pytanie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => item.Ocena)
+        </dd>
+}
+
+        @foreach (var item in Model.OcenySlownes)
+    {
+        <dt>
+            @Html.DisplayFor(model => item.Pytanie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => item.Odpowiedz)
+        </dd>
+}
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Powrót", "Index")
+</p>

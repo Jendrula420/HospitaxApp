@@ -1,0 +1,42 @@
+﻿@model HospitaxApp.Models.Ankiety
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ankiety</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Pytanie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pytanie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ocena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ocena)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Protokoly.Kurs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Protokoly.Kurs)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AnkietyID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

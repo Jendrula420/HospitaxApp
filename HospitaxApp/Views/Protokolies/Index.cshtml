@@ -1,0 +1,46 @@
+﻿@model IEnumerable<HospitaxApp.Models.Protokoly>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Hospitacje</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Hospitowany
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kurs)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Data)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prowadzacy.Tytul)
+            @Html.DisplayFor(modelItem => item.Prowadzacy.Imie)
+            @Html.DisplayFor(modelItem => item.Prowadzacy.Nazwisko)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kurs)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data)
+        </td>
+
+        <td>
+            @Html.ActionLink("Wypełnij", "Edit", new {id = item.ProtokolyID}) |
+            @Html.ActionLink("Zobacz", "Details", new {id = item.ProtokolyID}) |
+           
+        </td>
+    </tr>
+}
+
+</table>

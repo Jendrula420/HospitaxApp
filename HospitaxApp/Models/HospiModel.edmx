@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HospitaxDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Ankiety">
+          <Key>
+            <PropertyRef Name="AnkietyID" />
+          </Key>
+          <Property Name="AnkietyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pytanie" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="Ocena" Type="int" Nullable="false" />
+          <Property Name="ProtokolyID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hospitujacy">
+          <Key>
+            <PropertyRef Name="HospitujacyID" />
+          </Key>
+          <Property Name="HospitujacyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProwadzacyID" Type="int" Nullable="false" />
+          <Property Name="ProtokolyID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OcenySlowne">
+          <Key>
+            <PropertyRef Name="OcenySlowneID" />
+          </Key>
+          <Property Name="OcenySlowneID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pytanie" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Odpowiedz" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="ProtokolyID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Protokoly">
+          <Key>
+            <PropertyRef Name="ProtokolyID" />
+          </Key>
+          <Property Name="ProtokolyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kurs" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
+          <Property Name="ProwadzacyID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Prowadzacy">
+          <Key>
+            <PropertyRef Name="ProwadzacyID" />
+          </Key>
+          <Property Name="ProwadzacyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imie" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nazwisko" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tytul" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Ankiety_Protokoly">
+          <End Role="Protokoly" Type="Self.Protokoly" Multiplicity="1" />
+          <End Role="Ankiety" Type="Self.Ankiety" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Protokoly">
+              <PropertyRef Name="ProtokolyID" />
+            </Principal>
+            <Dependent Role="Ankiety">
+              <PropertyRef Name="ProtokolyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hospitujacy_Protokoly">
+          <End Role="Protokoly" Type="Self.Protokoly" Multiplicity="1" />
+          <End Role="Hospitujacy" Type="Self.Hospitujacy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Protokoly">
+              <PropertyRef Name="ProtokolyID" />
+            </Principal>
+            <Dependent Role="Hospitujacy">
+              <PropertyRef Name="ProtokolyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hospitujacy_Prowadzacy">
+          <End Role="Prowadzacy" Type="Self.Prowadzacy" Multiplicity="1" />
+          <End Role="Hospitujacy" Type="Self.Hospitujacy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prowadzacy">
+              <PropertyRef Name="ProwadzacyID" />
+            </Principal>
+            <Dependent Role="Hospitujacy">
+              <PropertyRef Name="ProwadzacyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OcenySlowne_Protokoly">
+          <End Role="Protokoly" Type="Self.Protokoly" Multiplicity="1" />
+          <End Role="OcenySlowne" Type="Self.OcenySlowne" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Protokoly">
+              <PropertyRef Name="ProtokolyID" />
+            </Principal>
+            <Dependent Role="OcenySlowne">
+              <PropertyRef Name="ProtokolyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Protokoly_Prowadzacy">
+          <End Role="Prowadzacy" Type="Self.Prowadzacy" Multiplicity="1" />
+          <End Role="Protokoly" Type="Self.Protokoly" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prowadzacy">
+              <PropertyRef Name="ProwadzacyID" />
+            </Principal>
+            <Dependent Role="Protokoly">
+              <PropertyRef Name="ProwadzacyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HospitaxDBModelStoreContainer">
+          <EntitySet Name="Ankiety" EntityType="Self.Ankiety" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hospitujacy" EntityType="Self.Hospitujacy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OcenySlowne" EntityType="Self.OcenySlowne" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Protokoly" EntityType="Self.Protokoly" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prowadzacy" EntityType="Self.Prowadzacy" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Ankiety_Protokoly" Association="Self.FK_Ankiety_Protokoly">
+            <End Role="Protokoly" EntitySet="Protokoly" />
+            <End Role="Ankiety" EntitySet="Ankiety" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hospitujacy_Protokoly" Association="Self.FK_Hospitujacy_Protokoly">
+            <End Role="Protokoly" EntitySet="Protokoly" />
+            <End Role="Hospitujacy" EntitySet="Hospitujacy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hospitujacy_Prowadzacy" Association="Self.FK_Hospitujacy_Prowadzacy">
+            <End Role="Prowadzacy" EntitySet="Prowadzacy" />
+            <End Role="Hospitujacy" EntitySet="Hospitujacy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OcenySlowne_Protokoly" Association="Self.FK_OcenySlowne_Protokoly">
+            <End Role="Protokoly" EntitySet="Protokoly" />
+            <End Role="OcenySlowne" EntitySet="OcenySlowne" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Protokoly_Prowadzacy" Association="Self.FK_Protokoly_Prowadzacy">
+            <End Role="Prowadzacy" EntitySet="Prowadzacy" />
+            <End Role="Protokoly" EntitySet="Protokoly" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HospitaxDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Ankiety">
+          <Key>
+            <PropertyRef Name="AnkietyID" />
+          </Key>
+          <Property Name="AnkietyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pytanie" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ocena" Type="Int32" Nullable="false" />
+          <Property Name="ProtokolyID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Protokoly" Relationship="HospitaxDBModel.FK_Ankiety_Protokoly" FromRole="Ankiety" ToRole="Protokoly" />
+        </EntityType>
+        <EntityType Name="Hospitujacy">
+          <Key>
+            <PropertyRef Name="HospitujacyID" />
+          </Key>
+          <Property Name="HospitujacyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProwadzacyID" Type="Int32" Nullable="false" />
+          <Property Name="ProtokolyID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Protokoly" Relationship="HospitaxDBModel.FK_Hospitujacy_Protokoly" FromRole="Hospitujacy" ToRole="Protokoly" />
+          <NavigationProperty Name="Prowadzacy" Relationship="HospitaxDBModel.FK_Hospitujacy_Prowadzacy" FromRole="Hospitujacy" ToRole="Prowadzacy" />
+        </EntityType>
+        <EntityType Name="OcenySlowne">
+          <Key>
+            <PropertyRef Name="OcenySlowneID" />
+          </Key>
+          <Property Name="OcenySlowneID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pytanie" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Odpowiedz" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProtokolyID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Protokoly" Relationship="HospitaxDBModel.FK_OcenySlowne_Protokoly" FromRole="OcenySlowne" ToRole="Protokoly" />
+        </EntityType>
+        <EntityType Name="Protokoly">
+          <Key>
+            <PropertyRef Name="ProtokolyID" />
+          </Key>
+          <Property Name="ProtokolyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kurs" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProwadzacyID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Ankieties" Relationship="HospitaxDBModel.FK_Ankiety_Protokoly" FromRole="Protokoly" ToRole="Ankiety" />
+          <NavigationProperty Name="Hospitujacies" Relationship="HospitaxDBModel.FK_Hospitujacy_Protokoly" FromRole="Protokoly" ToRole="Hospitujacy" />
+          <NavigationProperty Name="OcenySlownes" Relationship="HospitaxDBModel.FK_OcenySlowne_Protokoly" FromRole="Protokoly" ToRole="OcenySlowne" />
+          <NavigationProperty Name="Prowadzacy" Relationship="HospitaxDBModel.FK_Protokoly_Prowadzacy" FromRole="Protokoly" ToRole="Prowadzacy" />
+        </EntityType>
+        <EntityType Name="Prowadzacy">
+          <Key>
+            <PropertyRef Name="ProwadzacyID" />
+          </Key>
+          <Property Name="ProwadzacyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tytul" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Hospitujacies" Relationship="HospitaxDBModel.FK_Hospitujacy_Prowadzacy" FromRole="Prowadzacy" ToRole="Hospitujacy" />
+          <NavigationProperty Name="Protokolies" Relationship="HospitaxDBModel.FK_Protokoly_Prowadzacy" FromRole="Prowadzacy" ToRole="Protokoly" />
+        </EntityType>
+        <EntityContainer Name="HospitaxDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Ankieties" EntityType="Self.Ankiety" />
+          <EntitySet Name="Hospitujacies" EntityType="Self.Hospitujacy" />
+          <EntitySet Name="OcenySlownes" EntityType="Self.OcenySlowne" />
+          <EntitySet Name="Protokolies" EntityType="Self.Protokoly" />
+          <EntitySet Name="Prowadzacies" EntityType="Self.Prowadzacy" />
+          <AssociationSet Name="FK_Ankiety_Protokoly" Association="HospitaxDBModel.FK_Ankiety_Protokoly">
+            <End Role="Protokoly" EntitySet="Protokolies" />
+            <End Role="Ankiety" EntitySet="Ankieties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hospitujacy_Protokoly" Association="HospitaxDBModel.FK_Hospitujacy_Protokoly">
+            <End Role="Protokoly" EntitySet="Protokolies" />
+            <End Role="Hospitujacy" EntitySet="Hospitujacies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hospitujacy_Prowadzacy" Association="HospitaxDBModel.FK_Hospitujacy_Prowadzacy">
+            <End Role="Prowadzacy" EntitySet="Prowadzacies" />
+            <End Role="Hospitujacy" EntitySet="Hospitujacies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OcenySlowne_Protokoly" Association="HospitaxDBModel.FK_OcenySlowne_Protokoly">
+            <End Role="Protokoly" EntitySet="Protokolies" />
+            <End Role="OcenySlowne" EntitySet="OcenySlownes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Protokoly_Prowadzacy" Association="HospitaxDBModel.FK_Protokoly_Prowadzacy">
+            <End Role="Prowadzacy" EntitySet="Prowadzacies" />
+            <End Role="Protokoly" EntitySet="Protokolies" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Ankiety_Protokoly">
+          <End Type="HospitaxDBModel.Protokoly" Role="Protokoly" Multiplicity="1" />
+          <End Type="HospitaxDBModel.Ankiety" Role="Ankiety" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Protokoly">
+              <PropertyRef Name="ProtokolyID" />
+            </Principal>
+            <Dependent Role="Ankiety">
+              <PropertyRef Name="ProtokolyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hospitujacy_Protokoly">
+          <End Type="HospitaxDBModel.Protokoly" Role="Protokoly" Multiplicity="1" />
+          <End Type="HospitaxDBModel.Hospitujacy" Role="Hospitujacy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Protokoly">
+              <PropertyRef Name="ProtokolyID" />
+            </Principal>
+            <Dependent Role="Hospitujacy">
+              <PropertyRef Name="ProtokolyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hospitujacy_Prowadzacy">
+          <End Type="HospitaxDBModel.Prowadzacy" Role="Prowadzacy" Multiplicity="1" />
+          <End Type="HospitaxDBModel.Hospitujacy" Role="Hospitujacy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prowadzacy">
+              <PropertyRef Name="ProwadzacyID" />
+            </Principal>
+            <Dependent Role="Hospitujacy">
+              <PropertyRef Name="ProwadzacyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OcenySlowne_Protokoly">
+          <End Type="HospitaxDBModel.Protokoly" Role="Protokoly" Multiplicity="1" />
+          <End Type="HospitaxDBModel.OcenySlowne" Role="OcenySlowne" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Protokoly">
+              <PropertyRef Name="ProtokolyID" />
+            </Principal>
+            <Dependent Role="OcenySlowne">
+              <PropertyRef Name="ProtokolyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Protokoly_Prowadzacy">
+          <End Type="HospitaxDBModel.Prowadzacy" Role="Prowadzacy" Multiplicity="1" />
+          <End Type="HospitaxDBModel.Protokoly" Role="Protokoly" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prowadzacy">
+              <PropertyRef Name="ProwadzacyID" />
+            </Principal>
+            <Dependent Role="Protokoly">
+              <PropertyRef Name="ProwadzacyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HospitaxDBModelStoreContainer" CdmEntityContainer="HospitaxDBEntities">
+          <EntitySetMapping Name="Ankieties">
+            <EntityTypeMapping TypeName="HospitaxDBModel.Ankiety">
+              <MappingFragment StoreEntitySet="Ankiety">
+                <ScalarProperty Name="AnkietyID" ColumnName="AnkietyID" />
+                <ScalarProperty Name="Pytanie" ColumnName="Pytanie" />
+                <ScalarProperty Name="Ocena" ColumnName="Ocena" />
+                <ScalarProperty Name="ProtokolyID" ColumnName="ProtokolyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hospitujacies">
+            <EntityTypeMapping TypeName="HospitaxDBModel.Hospitujacy">
+              <MappingFragment StoreEntitySet="Hospitujacy">
+                <ScalarProperty Name="HospitujacyID" ColumnName="HospitujacyID" />
+                <ScalarProperty Name="ProwadzacyID" ColumnName="ProwadzacyID" />
+                <ScalarProperty Name="ProtokolyID" ColumnName="ProtokolyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OcenySlownes">
+            <EntityTypeMapping TypeName="HospitaxDBModel.OcenySlowne">
+              <MappingFragment StoreEntitySet="OcenySlowne">
+                <ScalarProperty Name="OcenySlowneID" ColumnName="OcenySlowneID" />
+                <ScalarProperty Name="Pytanie" ColumnName="Pytanie" />
+                <ScalarProperty Name="Odpowiedz" ColumnName="Odpowiedz" />
+                <ScalarProperty Name="ProtokolyID" ColumnName="ProtokolyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Protokolies">
+            <EntityTypeMapping TypeName="HospitaxDBModel.Protokoly">
+              <MappingFragment StoreEntitySet="Protokoly">
+                <ScalarProperty Name="ProtokolyID" ColumnName="ProtokolyID" />
+                <ScalarProperty Name="Kurs" ColumnName="Kurs" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="ProwadzacyID" ColumnName="ProwadzacyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prowadzacies">
+            <EntityTypeMapping TypeName="HospitaxDBModel.Prowadzacy">
+              <MappingFragment StoreEntitySet="Prowadzacy">
+                <ScalarProperty Name="ProwadzacyID" ColumnName="ProwadzacyID" />
+                <ScalarProperty Name="Imie" ColumnName="Imie" />
+                <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+                <ScalarProperty Name="Tytul" ColumnName="Tytul" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

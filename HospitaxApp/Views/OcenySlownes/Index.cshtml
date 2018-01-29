@@ -1,0 +1,45 @@
+﻿@model IEnumerable<HospitaxApp.Models.OcenySlowne>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Pytanie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Odpowiedz)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Protokoly.Kurs)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pytanie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Odpowiedz)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Protokoly.Kurs)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.OcenySlowneID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.OcenySlowneID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.OcenySlowneID })
+        </td>
+    </tr>
+}
+
+</table>
